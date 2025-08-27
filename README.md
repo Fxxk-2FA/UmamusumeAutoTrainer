@@ -120,7 +120,7 @@ https://github.com/shiokaze/UmamusumeAutoTrainer/issues/25
 - [x] 已完成任务列表时间倒序展示
 - [ ] 推送消息
 - [x] AI逻辑参考千叶，支持数值大于某个值后训练权重大幅降低
-- [ ] 页面上增加清空等待list、已结束list的逻辑
+- [x] 页面上增加清空等待list、已结束list的逻辑
 
 ### 参与开发
 
