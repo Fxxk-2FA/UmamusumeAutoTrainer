@@ -121,6 +121,7 @@ https://github.com/shiokaze/UmamusumeAutoTrainer/issues/25
 - [ ] 推送消息
 - [x] AI逻辑参考千叶，支持数值大于某个值后训练权重大幅降低
 - [x] 页面上增加清空等待list、已结束list的逻辑
+- [ ] 处理异常情况，例如早上5点的日期变化（点击确定）、打开APP的活动页面（点击关闭）
 
 ### 参与开发
 

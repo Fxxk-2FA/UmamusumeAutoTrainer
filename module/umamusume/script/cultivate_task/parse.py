@@ -242,7 +242,7 @@ def parse_training_result(ctx: UmamusumeContext, img, train_type: TrainingType):
         else:
             train_incr = [x if x != 0 else y for x, y in zip(train_incr, cur_train_incr)]
         non_zero_num = sum(numpy.array(train_incr) > 0)
-        if non_zero_num == 1:
+        if non_zero_num < 3:
             log.debug(train_incr)
             log.debug(f"Detect training result failed, retry!")
         else:
