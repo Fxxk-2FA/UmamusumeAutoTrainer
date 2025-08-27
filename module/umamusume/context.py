@@ -56,8 +56,6 @@ class CultivateContextDetail:
 class UmamusumeContext(BotContext):
     task: UmamusumeTask
     cultivate_detail: CultivateContextDetail
-    before_diamond_count: int = 0
-    after_diamond_count: int = 0
 
     def __init__(self, task, ctrl):
         super().__init__(task, ctrl)
