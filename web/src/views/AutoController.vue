@@ -75,7 +75,7 @@ export default {
               }
             )
             this.waitingTaskList = waitingTaskList
-            this.historyTaskList = historyTaskList
+            this.historyTaskList = historyTaskList.reverse()
             this.runningTask = runningTask
             this.cronJobList = cronJobList
             if(this.runningTask === undefined){

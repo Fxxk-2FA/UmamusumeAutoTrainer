@@ -28,7 +28,7 @@ class AoharuHaiScenario(BaseScenario):
     def get_turn_to_race_img(self, img) -> any:
         return img[70:120, 30:90]
     
-    def parse_training_result(self, img: any) -> list[int]:
+    def parse_training_result(self, img: any, offset: int = 0) -> list[int]:
         # 使用数字ocr达到更高准确率
         sub_img_speed_incr = img[800:830, 30:140]
         sub_img_speed_incr = cv2.copyMakeBorder(sub_img_speed_incr, 20, 20, 20, 20, cv2.BORDER_CONSTANT, None, (255, 255, 255))

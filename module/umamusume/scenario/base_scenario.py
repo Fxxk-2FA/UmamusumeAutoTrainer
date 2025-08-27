@@ -27,7 +27,7 @@ class BaseScenario(ABC):
         pass
 
     @abstractmethod
-    def parse_training_result(self, img: any) -> list[int]:
+    def parse_training_result(self, img: any, offset: int = 0) -> list[int]:
         """从屏幕上获取每一种训练增加的属性值"""
         pass
 

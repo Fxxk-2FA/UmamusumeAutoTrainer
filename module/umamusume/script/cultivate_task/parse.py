@@ -18,6 +18,14 @@ import bot.base.log as logger
 
 log = logger.get_logger(__name__)
 
+def parse_diamond(img, ctx: UmamusumeContext) -> int:
+    diamond_img = img[95:122, 410:512]
+    text = ocr_line(diamond_img)
+    if text == "":
+        cost = 0
+    else:
+        cost = re.sub("\\D", "", text)
+    return cost    
 
 def parse_date(img, ctx: UmamusumeContext) -> int:
     # 青春杯和URA的UI位置有所不同
@@ -226,8 +234,25 @@ def parse_train_type(ctx: UmamusumeContext, img) -> TrainingType:
 
 
 def parse_training_result(ctx: UmamusumeContext, img, train_type: TrainingType):
-    train_incr = ctx.cultivate_detail.scenario.parse_training_result(img)
+    train_incr = None
+    for i in range(3):
+        cur_train_incr = ctx.cultivate_detail.scenario.parse_training_result(img, i)
+        if not train_incr:
+            train_incr = cur_train_incr
+        else:
+            train_incr = [x if x != 0 else y for x, y in zip(train_incr, cur_train_incr)]
+        non_zero_num = sum(numpy.array(train_incr) > 0)
+        if non_zero_num == 1:
+            log.debug(train_incr)
+            log.debug(f"Detect training result failed, retry!")
+        else:
+            break
+
     log.debug(train_incr)
+    
+    # if sum(numpy.array(train_incr) > 0) < 2:
+    #     log.warning(f"Detect training result error, save file!")
+    #     cv2.imwrite(f'screen_badcase_{time.time()}.jpg', img)
     
     ctx.cultivate_detail.turn_info.training_info_list[train_type.value - 1].speed_incr = train_incr[0]
     ctx.cultivate_detail.turn_info.training_info_list[train_type.value - 1].stamina_incr = train_incr[1]
@@ -235,6 +260,7 @@ def parse_training_result(ctx: UmamusumeContext, img, train_type: TrainingType):
     ctx.cultivate_detail.turn_info.training_info_list[train_type.value - 1].will_incr = train_incr[3]
     ctx.cultivate_detail.turn_info.training_info_list[train_type.value - 1].intelligence_incr = train_incr[4]
     ctx.cultivate_detail.turn_info.training_info_list[train_type.value - 1].skill_point_incr = train_incr[5]
+
 
 
 def find_support_card(ctx: UmamusumeContext, img):

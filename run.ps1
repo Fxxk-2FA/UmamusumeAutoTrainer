@@ -1,3 +1,4 @@
 .\venv\Scripts\activate
-python .\check_update.py
+# python -m uiautomator2 init
+# python .\check_update.py
 python .\main.py

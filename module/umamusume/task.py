@@ -24,6 +24,9 @@ class TaskDetail:
     # 限时: 富士奇石的表演秀
     fujikiseki_show_mode: bool
     fujikiseki_show_difficulty: int
+    # 钻石
+    before_diamond_count: int = 0
+    after_diamond_count: int = 0
 
 
 class EndTaskReason(Enum):

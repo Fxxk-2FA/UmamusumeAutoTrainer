@@ -177,8 +177,14 @@ def script_cultivate_training_select(ctx: UmamusumeContext):
 
 def script_main_menu(ctx: UmamusumeContext):
     if ctx.cultivate_detail.cultivate_finish:
+        img = ctx.ctrl.get_screen()
+        ctx.task.detail.after_diamond_count = parse_diamond(img, ctx)
+        log.info("钻石变化：" + ctx.task.detail.before_diamond_count + "->" + ctx.task.detail.after_diamond_count)
         ctx.task.end_task(TaskStatus.TASK_STATUS_SUCCESS, EndTaskReason.COMPLETE)
         return
+    img = ctx.ctrl.get_screen()
+    ctx.task.detail.before_diamond_count = parse_diamond(img, ctx)
+    log.info("初始钻石：" + ctx.task.detail.before_diamond_count)
     ctx.ctrl.click_by_point(TO_CULTIVATE_SCENARIO_CHOOSE)
 
 
