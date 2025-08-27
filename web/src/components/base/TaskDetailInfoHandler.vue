@@ -12,6 +12,9 @@
         <button type="button" class="btn auto-btn" v-on:click="deleteTask">删除</button>
       </div>
       <UmamusumeTaskDetailInfo :task="task"></UmamusumeTaskDetailInfo>
+      <div>
+        <span>进度: {{(task.detail.cultivate_progress_info.progress/task.detail.cultivate_progress_info.total*100).toFixed(0)}}%</span>
+      </div>
       <div v-if="task.end_task_reason !== undefined && task.end_task_reason != ''">
         <span>状态: {{task.task_status}} ({{task.end_task_reason}})</span>
       </div>

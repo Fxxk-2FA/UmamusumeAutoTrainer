@@ -236,7 +236,7 @@ def parse_train_type(ctx: UmamusumeContext, img) -> TrainingType:
 def parse_training_result(ctx: UmamusumeContext, img, train_type: TrainingType):
     train_incr = None
     for i in range(3):
-        cur_train_incr = ctx.cultivate_detail.scenario.parse_training_result(img, i)
+        cur_train_incr = ctx.cultivate_detail.scenario.parse_training_result(img, i*3)
         if not train_incr:
             train_incr = cur_train_incr
         else:

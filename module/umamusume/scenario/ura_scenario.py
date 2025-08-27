@@ -31,27 +31,33 @@ class URAScenario(BaseScenario):
     def parse_training_result(self, img: any, offset: int = 0) -> list[int]:
         # NOTE: URA 必须使用ocr_line才能达到高准确率, 不能使用ocr_digits, 很奇怪
         sub_img_speed_incr = img[770:826, 30+offset:140+offset]
-        speed_incr_text = ocr_digits(sub_img_speed_incr)
+        sub_img_speed_incr = cv2.copyMakeBorder(sub_img_speed_incr, 20, 20, 20, 20, cv2.BORDER_CONSTANT, None, (255, 255, 255))
+        speed_incr_text = ocr_line(sub_img_speed_incr)
         speed_incr_text = re.sub("\\D", "", speed_incr_text)
 
         sub_img_stamina_incr = img[770:826, 140+offset:250+offset]
-        stamina_incr_text = ocr_digits(sub_img_stamina_incr)
+        sub_img_stamina_incr = cv2.copyMakeBorder(sub_img_stamina_incr, 20, 20, 20, 20, cv2.BORDER_CONSTANT, None, (255, 255, 255))
+        stamina_incr_text = ocr_line(sub_img_stamina_incr)
         stamina_incr_text = re.sub("\\D", "", stamina_incr_text)
 
         sub_img_power_incr = img[770:826, 250+offset:360+offset]
-        power_incr_text = ocr_digits(sub_img_power_incr)
+        sub_img_power_incr = cv2.copyMakeBorder(sub_img_power_incr, 20, 20, 20, 20, cv2.BORDER_CONSTANT, None, (255, 255, 255))
+        power_incr_text = ocr_line(sub_img_power_incr)
         power_incr_text = re.sub("\\D", "", power_incr_text)
 
         sub_img_will_incr = img[770:826, 360+offset:470+offset]
-        will_incr_text = ocr_digits(sub_img_will_incr)
+        sub_img_will_incr = cv2.copyMakeBorder(sub_img_will_incr, 20, 20, 20, 20, cv2.BORDER_CONSTANT, None, (255, 255, 255))
+        will_incr_text = ocr_line(sub_img_will_incr)
         will_incr_text = re.sub("\\D", "", will_incr_text)
 
         sub_img_intelligence_incr = img[770:826, 470+offset:580+offset]
-        intelligence_incr_text = ocr_digits(sub_img_intelligence_incr)
+        sub_img_intelligence_incr = cv2.copyMakeBorder(sub_img_intelligence_incr, 20, 20, 20, 20, cv2.BORDER_CONSTANT, None, (255, 255, 255))
+        intelligence_incr_text = ocr_line(sub_img_intelligence_incr)
         intelligence_incr_text = re.sub("\\D", "", intelligence_incr_text)
 
         sub_img_skill_point_incr = img[770:826, 588+offset:695+offset]
-        skill_point_incr_text = ocr_digits(sub_img_skill_point_incr)
+        sub_img_skill_point_incr = cv2.copyMakeBorder(sub_img_skill_point_incr, 20, 20, 20, 20, cv2.BORDER_CONSTANT, None, (255, 255, 255))
+        skill_point_incr_text = ocr_line(sub_img_skill_point_incr)
         skill_point_incr_text = re.sub("\\D", "", skill_point_incr_text)
 
         speed_icr = 0 if speed_incr_text == "" else int(speed_incr_text)

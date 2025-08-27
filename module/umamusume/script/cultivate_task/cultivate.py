@@ -26,6 +26,7 @@ def script_cultivate_main_menu(ctx: UmamusumeContext):
             ctx.cultivate_detail.turn_info_history.append(ctx.cultivate_detail.turn_info)
         ctx.cultivate_detail.turn_info = TurnInfo()
         ctx.cultivate_detail.turn_info.date = current_date
+        ctx.task.detail.cultivate_progress_info["progress"] = current_date
         log.debug("进入新回合，日期：" + str(current_date))
         ctx.cultivate_detail.reset_skill_learn()
 
@@ -180,6 +181,7 @@ def script_main_menu(ctx: UmamusumeContext):
         img = ctx.ctrl.get_screen()
         ctx.task.detail.after_diamond_count = parse_diamond(img, ctx)
         log.info("钻石变化：" + ctx.task.detail.before_diamond_count + "->" + ctx.task.detail.after_diamond_count)
+        ctx.task.detail.cultivate_progress_info["progress"] = 100
         ctx.task.end_task(TaskStatus.TASK_STATUS_SUCCESS, EndTaskReason.COMPLETE)
         return
     img = ctx.ctrl.get_screen()
