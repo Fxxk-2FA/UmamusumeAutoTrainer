@@ -24,7 +24,7 @@
         </span>
       </div>
       <div v-if="task.detail.before_diamond_count !== 0 && task.detail.after_diamond_count !== 0">
-        <span>钻石变化: {{task.detail.before_diamond_count}} -> {{task.detail.after_diamond_count}}</span>
+        <span>钻石变化: +{{task.detail.after_diamond_count - task.detail.before_diamond_count}}</span>
       </div>
     </div>
   </div>
