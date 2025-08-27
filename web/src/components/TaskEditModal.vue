@@ -49,6 +49,12 @@
                   </select>
                 </div>
               </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="selectTaskNum">循环次数</label>
+                  <input v-model="taskNum" type="number" aria-valuemin="1" class="form-control" id="selectTaskNum" placeholder="">
+                </div>
+              </div>
             </div>
             <!-- URA额外配置 -->
             <div class="row" v-if="selectedScenario === 1">
@@ -777,6 +783,7 @@ export default {
       expectIntelligenceValue:300,
 
       supportCardLevel: 50,
+      taskNum: 1,
       
       presetsUse: {
           name: "默认",
@@ -954,11 +961,13 @@ export default {
         }
       }
       console.log(JSON.stringify(payload))
-      this.axios.post("/task", JSON.stringify(payload)).then(
-          ()=>{
-            $('#create-task-list-modal').modal('hide');
-          }
-      )
+      for (let i = 0; i < this.taskNum; i++) {
+        this.axios.post("/task", JSON.stringify(payload)).then(
+            ()=>{
+              $('#create-task-list-modal').modal('hide');
+            }
+        )
+      }
     },
     applyPresetRace: function(){
       this.selectedScenario = this.presetsUse.scenario || 1
