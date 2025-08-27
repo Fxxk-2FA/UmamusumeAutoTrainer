@@ -96,7 +96,8 @@ class TurnOperation:
 
     def log_turn_operation(self):
         log.info("本回合执行操作：%s", self.turn_operation_type.name)
-        log.info("本回合备选操作：%s", self.turn_operation_type_replace.name)
+        if self.turn_operation_type_replace != TurnOperationType.TURN_OPERATION_TYPE_UNKNOWN:
+            log.info("本回合备选操作：%s", self.turn_operation_type_replace.name)
         if self.turn_operation_type == TurnOperationType.TURN_OPERATION_TYPE_TRAINING:
             log.info("训练类型：%s", self.training_type.name)
 
@@ -141,16 +142,17 @@ class TurnInfo:
         log.info("体力剩余 " + str(self.remain_stamina))
         log.info("当前属性值 速度：%s, 耐力：%s, 力量：%s, 毅力：%s, 智力：%s, 技能点：%s", self.uma_attribute.speed,
                  self.uma_attribute.stamina, self.uma_attribute.power, self.uma_attribute.will, self.uma_attribute.intelligence, self.uma_attribute.skill_point)
-        log.info("速度训练结果：")
-        self.training_info_list[0].log_training_info(scenario_type)
-        log.info("耐力训练结果：")
-        self.training_info_list[1].log_training_info(scenario_type)
-        log.info("力量训练结果：")
-        self.training_info_list[2].log_training_info(scenario_type)
-        log.info("毅力训练结果：")
-        self.training_info_list[3].log_training_info(scenario_type)
-        log.info("智力训练结果：")
-        self.training_info_list[4].log_training_info(scenario_type)
+        if self.turn_operation and self.turn_operation.turn_operation_type == TurnOperationType.TURN_OPERATION_TYPE_TRAINING:
+            log.info("速度训练结果：")
+            self.training_info_list[0].log_training_info(scenario_type)
+            log.info("耐力训练结果：")
+            self.training_info_list[1].log_training_info(scenario_type)
+            log.info("力量训练结果：")
+            self.training_info_list[2].log_training_info(scenario_type)
+            log.info("毅力训练结果：")
+            self.training_info_list[3].log_training_info(scenario_type)
+            log.info("智力训练结果：")
+            self.training_info_list[4].log_training_info(scenario_type)
 
 
 class CultivateContextDetail:

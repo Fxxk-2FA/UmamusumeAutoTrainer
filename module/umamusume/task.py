@@ -76,6 +76,8 @@ def build_task(task_execute_mode: TaskExecuteMode, task_type: int,
     # 限时: 富士奇石的表演秀
     td.fujikiseki_show_mode = attachment_data['fujikiseki_show_mode']
     td.fujikiseki_show_difficulty = attachment_data['fujikiseki_show_difficulty']
+    td.before_diamond_count = 0
+    td.after_diamond_count = 0
     ut.detail = td
     return ut
 

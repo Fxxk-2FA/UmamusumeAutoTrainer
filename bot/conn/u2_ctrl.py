@@ -77,6 +77,7 @@ class U2AndroidController(AndroidController):
     # get_screen 获取图片
     def get_screen(self, to_gray=False):
         cur_screen = self.u2client.screenshot(format='opencv')
+        # cv2.imwrite(f'screen_{time.time()}.png', cur_screen)
         if to_gray:
             return cv2.cvtColor(cur_screen, cv2.COLOR_BGR2GRAY)
         return cur_screen

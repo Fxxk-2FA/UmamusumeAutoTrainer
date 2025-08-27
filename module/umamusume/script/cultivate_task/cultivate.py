@@ -187,6 +187,8 @@ def script_main_menu(ctx: UmamusumeContext):
     log.info("初始钻石：" + ctx.task.detail.before_diamond_count)
     ctx.ctrl.click_by_point(TO_CULTIVATE_SCENARIO_CHOOSE)
 
+def script_cultivate_continue(ctx: UmamusumeContext):
+    ctx.ctrl.click_by_point(CULTIVATE_CONTINUE_POINT)
 
 def script_scenario_select(ctx: UmamusumeContext):
     target_scenario = ctx.cultivate_detail.scenario.scenario_type()
