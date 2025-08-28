@@ -123,6 +123,7 @@ https://github.com/shiokaze/UmamusumeAutoTrainer/issues/25
 - [x] 页面上增加清空等待list、已结束list的逻辑
 - [ ] 处理异常情况，例如早上5点的日期变化（点击确定）、打开APP的活动页面（点击关闭）
 - [x] 显示当前训练进度，当前日期/总日期*100%
+- [ ] 优化点技能逻辑
 
 ### 参与开发
 

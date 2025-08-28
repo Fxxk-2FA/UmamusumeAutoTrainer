@@ -199,7 +199,6 @@ def get_training_basic_attribute_score(ctx: UmamusumeContext, turn_info: TurnInf
             extra_weight = ctx.cultivate_detail.extra_weight[1]
         elif 48 < date:
             extra_weight = ctx.cultivate_detail.extra_weight[2]
-    log.debug("本回合额外权重：" + str(extra_weight))
     turn_expect_attribute = [0, 0, 0, 0, 0]
     ura_extra_attr = 50
     if date > 72:
@@ -214,6 +213,11 @@ def get_training_basic_attribute_score(ctx: UmamusumeContext, turn_info: TurnInf
         turn_expect_attribute[i] = turn_expect_attribute_item if turn_expect_attribute_item > 0 else 1
     turn_uma_attr = [turn_info.uma_attribute.speed, turn_info.uma_attribute.stamina, turn_info.uma_attribute.power,
               turn_info.uma_attribute.will, turn_info.uma_attribute.intelligence]
+    if turn_uma_attr[1] > expect_attribute[1]:
+        log.info("耐力已达标，不再训练")
+        extra_weight[1] = -1
+    log.debug("本回合额外权重：" + str(extra_weight))
+    
     result = []
     expect_attribute_all_complete = all(x >= y for x, y in zip(turn_uma_attr, cultivate_expect_attribute))
     if expect_attribute_all_complete:
