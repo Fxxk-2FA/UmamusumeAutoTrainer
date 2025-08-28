@@ -3,6 +3,7 @@ import time
 import threading
 
 import numpy as np
+import requests
 
 from bot.base.task import TaskStatus, EndTaskReason
 from module.umamusume.asset.point import *
@@ -175,18 +176,32 @@ def script_cultivate_training_select(ctx: UmamusumeContext):
         ctx.ctrl.click_by_point(RETURN_TO_CULTIVATE_MAIN_MENU)
         return
 
+def send_message(msg):
+    # 最长100
+    requests.get("https://wxpusher.zjiecode.com/api/send/message/SPT_2T16UpZOWtaEItyIprAzIvbAqhec/" + msg)
 
 def script_main_menu(ctx: UmamusumeContext):
     if ctx.cultivate_detail.cultivate_finish:
         img = ctx.ctrl.get_screen()
         ctx.task.detail.after_diamond_count = parse_diamond(img, ctx)
-        log.info("钻石变化：" + ctx.task.detail.before_diamond_count + "->" + ctx.task.detail.after_diamond_count)
+        diamond_msg = f"钻石变化：{ctx.task.detail.before_diamond_count} -> {ctx.task.detail.after_diamond_count}"
+        if ctx.task.detail.after_diamond_count != 0 and ctx.task.detail.before_diamond_count != 0:
+            diamond_msg += f", +{int(ctx.task.detail.after_diamond_count) - int(ctx.task.detail.before_diamond_count)}"
+        log.info(diamond_msg)
+        send_message(diamond_msg)
+        
+        factor_msg = "因子："
+        if 'factor_list' in ctx.task.detail.cultivate_result:
+            for factor in ctx.task.detail.cultivate_result['factor_list']:
+                factor_msg += f"{factor[0]}({factor[1]}) "
+        send_message(factor_msg)
+
         ctx.task.detail.cultivate_progress_info["progress"] = 100
         ctx.task.end_task(TaskStatus.TASK_STATUS_SUCCESS, EndTaskReason.COMPLETE)
         return
     img = ctx.ctrl.get_screen()
     ctx.task.detail.before_diamond_count = parse_diamond(img, ctx)
-    log.info("初始钻石：" + ctx.task.detail.before_diamond_count)
+    log.info(f"初始钻石：{ctx.task.detail.before_diamond_count}")
     ctx.ctrl.click_by_point(TO_CULTIVATE_SCENARIO_CHOOSE)
 
 def script_cultivate_continue(ctx: UmamusumeContext):

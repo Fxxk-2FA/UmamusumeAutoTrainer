@@ -19,6 +19,7 @@ class TaskDetail:
     allow_recover_tp: bool
     cultivate_progress_info: dict
     extra_weight: list
+    cultivate_result: dict
     # 剧本相关配置
     scenario_config: ScenarioConfig
     # 限时: 富士奇石的表演秀

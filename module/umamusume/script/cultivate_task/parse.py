@@ -490,7 +490,10 @@ def parse_factor(ctx: UmamusumeContext):
             match_result.matched_area[0][0]:match_result.matched_area[1][0]] = 0
             factor_info[0] = factor_name
             factor_info[1] = factor_level
-            factor_list.append(factor_info)
+            if factor_name in ['速度', '耐力', '力量', '毅力', '智力', '短距离' , '英里', '中距离', '长距离', '泥地', '草地', '领跑', '跟前', '居中', '后追']:
+                factor_list.insert(0, factor_info)
+            else:
+                factor_list.append(factor_info)
         else:
             break
     ctx.cultivate_detail.parse_factor_done = True
