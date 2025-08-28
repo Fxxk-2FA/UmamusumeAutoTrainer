@@ -27,7 +27,7 @@ def script_cultivate_main_menu(ctx: UmamusumeContext):
             ctx.cultivate_detail.turn_info_history.append(ctx.cultivate_detail.turn_info)
         ctx.cultivate_detail.turn_info = TurnInfo()
         ctx.cultivate_detail.turn_info.date = current_date
-        ctx.task.detail.cultivate_progress_info["progress"] = current_date
+        ctx.task.detail.cultivate_progress_info["progress"] = current_date if current_date > 72 else current_date / 78 * 100
         log.debug("进入新回合，日期：" + str(current_date))
         ctx.cultivate_detail.reset_skill_learn()
 

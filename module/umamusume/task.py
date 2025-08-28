@@ -70,7 +70,7 @@ def build_task(task_execute_mode: TaskExecuteMode, task_type: int,
     td.allow_recover_tp = attachment_data['allow_recover_tp']
     td.extra_weight = attachment_data['extra_weight']
     td.cultivate_result = {}
-    td.cultivate_progress_info = {"progress": 0, "total": 100}
+    td.cultivate_progress_info = {"progress": 0}
     # 剧本相关设置
     td.scenario_config = ScenarioConfig(
         ura_config = None if (attachment_data['ura_config'] is None) else UraConfig(attachment_data['ura_config']),

@@ -51,6 +51,9 @@ TITLE = [
     # 青春杯
     "自动编成",
     "对战确认",
+    # 5点日期变化
+    "日期变化"
+    "公告"
 ]
 
 
@@ -190,5 +193,9 @@ def script_info(ctx: UmamusumeContext):
         if title_text == TITLE[32]:
             # 确认青春杯对手
             ctx.ctrl.click(520, 920, "确认对战")
+        if title_text == TITLE[33]:
+            ctx.ctrl.click(370, 840, "确认")
+        if title_text == TITLE[34]:
+            ctx.ctrl.click(360, 1200, "关闭")
         time.sleep(1)
 
