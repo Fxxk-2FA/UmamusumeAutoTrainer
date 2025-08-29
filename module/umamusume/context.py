@@ -26,7 +26,7 @@ class CultivateContextDetail:
     learn_skill_threshold: int
     learn_skill_only_user_provided: bool
     learn_skill_before_race: bool
-    allow_recover_tp: bool
+    allow_recover_tp: int
     parse_factor_done: bool
     extra_weight: list
 
