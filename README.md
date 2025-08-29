@@ -112,7 +112,7 @@ https://github.com/shiokaze/UmamusumeAutoTrainer/issues/25
 - [ ] 定时执行任务
 - [ ] 育成中ai逻辑优化
 - [ ] 事件支持配置选项
-- [ ] 自动完成每日金币/支援点/jjc
+- [ ] 自动完成每日金币/支援点/jjc/特卖商店
 - [x] 提高育成中的训练数据识别率
 - [x] 支持多次循环跑，创建多个task
 - [x] 外出只在不佳以下的時候
@@ -125,6 +125,8 @@ https://github.com/shiokaze/UmamusumeAutoTrainer/issues/25
 - [x] 显示当前训练进度，当前日期/总日期*100%
 - [ ] 优化点技能逻辑
 - [x] 优化进度计算
+- [ ] 计算比赛胜利时的马身差距，打印
+- [ ] 巅峰杯逻辑
 
 ### 参与开发
 
