@@ -15,6 +15,9 @@
       <div>
         <span>进度: {{task.detail.cultivate_progress_info.progress.toFixed(0)}}%</span>
       </div>
+      <div>
+        <span>大差/比赛数: {{task.detail.big_diff_race_count}}/{{task.detail.race_count}}</span>
+      </div>
       <div v-if="task.end_task_reason !== undefined && task.end_task_reason != ''">
         <span>状态: {{task.task_status}} ({{task.end_task_reason}})</span>
       </div>

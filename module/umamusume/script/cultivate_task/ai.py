@@ -113,9 +113,9 @@ def get_operation(ctx: UmamusumeContext) -> TurnOperation | None:
         medic = True
 
     trip = False
-    if not ctx.cultivate_detail.turn_info.medic_room_available and (ctx.cultivate_detail.turn_info.date <= 36 and ctx.cultivate_detail.turn_info.motivation_level.value <= 3 and ctx.cultivate_detail.turn_info.remain_stamina < 90 and not support_card_max >= 3
-                                                                    or 40 < ctx.cultivate_detail.turn_info.date <= 60 and ctx.cultivate_detail.turn_info.motivation_level.value <= 3 and ctx.cultivate_detail.turn_info.remain_stamina < 90
-                                                                    or 64 < ctx.cultivate_detail.turn_info.date <= 99 and ctx.cultivate_detail.turn_info.motivation_level.value <= 3 and ctx.cultivate_detail.turn_info.remain_stamina < 90):
+    if not ctx.cultivate_detail.turn_info.medic_room_available and (ctx.cultivate_detail.turn_info.date <= 36 and ctx.cultivate_detail.turn_info.motivation_level.value <= 2 and ctx.cultivate_detail.turn_info.remain_stamina < 90 and not support_card_max >= 3
+                                                                    or 40 < ctx.cultivate_detail.turn_info.date <= 60 and ctx.cultivate_detail.turn_info.motivation_level.value <= 2 and ctx.cultivate_detail.turn_info.remain_stamina < 90
+                                                                    or 64 < ctx.cultivate_detail.turn_info.date <= 99 and ctx.cultivate_detail.turn_info.motivation_level.value <= 2 and ctx.cultivate_detail.turn_info.remain_stamina < 90):
         trip = True
 
     rest = False
@@ -127,10 +127,11 @@ def get_operation(ctx: UmamusumeContext) -> TurnOperation | None:
 
     expect_operation_type = TurnOperationType.TURN_OPERATION_TYPE_UNKNOWN
 
-    if medic and expect_operation_type is TurnOperationType.TURN_OPERATION_TYPE_UNKNOWN:
+    # 最后几轮不去医务室和外出
+    if medic and ctx.cultivate_detail.turn_info.date < 64 and expect_operation_type is TurnOperationType.TURN_OPERATION_TYPE_UNKNOWN:
         expect_operation_type = TurnOperationType.TURN_OPERATION_TYPE_MEDIC
 
-    if trip and expect_operation_type is TurnOperationType.TURN_OPERATION_TYPE_UNKNOWN:
+    if trip and ctx.cultivate_detail.turn_info.date < 64 and expect_operation_type is TurnOperationType.TURN_OPERATION_TYPE_UNKNOWN:
         expect_operation_type = TurnOperationType.TURN_OPERATION_TYPE_TRIP
 
     if rest and expect_operation_type is TurnOperationType.TURN_OPERATION_TYPE_UNKNOWN:

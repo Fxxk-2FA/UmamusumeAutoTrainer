@@ -330,6 +330,7 @@ def find_race(ctx: UmamusumeContext, img, race_id: int = 0) -> bool:
                     if image_match(race_name_img, target_race_template).find_match:
                         ctx.ctrl.click(match_result.center_point[0], match_result.center_point[1],
                                        "选择比赛：" + str(RACE_LIST[race_id][1]))
+                        ctx.cultivate_detail.current_race_name = str(RACE_LIST[race_id][1])
                         return True
             img[match_result.matched_area[0][1]:match_result.matched_area[1][1],
             match_result.matched_area[0][0]:match_result.matched_area[1][0]] = 0

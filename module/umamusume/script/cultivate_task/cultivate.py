@@ -426,6 +426,26 @@ def script_in_race(ctx: UmamusumeContext):
 
 
 def script_cultivate_race_result(ctx: UmamusumeContext):
+    # 是否是第一名
+    img = cv2.cvtColor(ctx.current_screen, cv2.COLOR_BGR2GRAY)
+    if image_match(img, UI_RACE_RESULT_1ST).find_match:
+        # 寻找第二名的马身
+        text = ocr_line(img[830: 853, 570: 678])
+        if text == "":
+            pass
+        elif text == "大差距":
+            ctx.task.detail.big_diff_race_count += 1
+        else:
+            if "/" in text:
+                diff = int(text[0])
+            else:
+                diff = int(re.sub("\\D", "", text))
+            if diff > 7:
+                ctx.task.detail.big_diff_race_count += 1
+        current_race_name = ocr_line(img[503: 546, 26: 339])
+        log.debug(f"比赛 ({current_race_name}) 胜利，与第二名差距：{text}")
+    
+    ctx.task.detail.race_count += 1
     ctx.ctrl.click_by_point(RACE_RESULT_CONFIRM)
 
 

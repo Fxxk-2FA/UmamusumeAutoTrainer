@@ -28,6 +28,9 @@ class TaskDetail:
     # 钻石
     before_diamond_count: int = 0
     after_diamond_count: int = 0
+    # 马身差距
+    race_count: int = 0
+    big_diff_race_count: int = 0
 
 
 class EndTaskReason(Enum):
@@ -81,6 +84,8 @@ def build_task(task_execute_mode: TaskExecuteMode, task_type: int,
     td.fujikiseki_show_difficulty = attachment_data['fujikiseki_show_difficulty']
     td.before_diamond_count = 0
     td.after_diamond_count = 0
+    td.race_count = 0
+    td.big_diff_race_count = 0
     ut.detail = td
     return ut
 
