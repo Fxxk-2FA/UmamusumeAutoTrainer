@@ -8,10 +8,11 @@ import bot.base.log as logger
 log = logger.get_logger(__name__)
 
 event_map: dict[str, Union[callable, int]] = {
-    "安心～针灸师，登☆场": 5,
+    "安心～针灸师，登☆场": 4,
     "新年的抱负": scenario_event_1,
     "新年参拜": scenario_event_2,
     "新年祈福": scenario_event_2,
+    "孤狼": 2,
 
     # 青春杯事件
     "新手教程": 2,

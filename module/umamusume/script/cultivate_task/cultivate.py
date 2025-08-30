@@ -442,7 +442,7 @@ def script_cultivate_race_result(ctx: UmamusumeContext):
                 diff = int(re.sub("\\D", "", text))
             if diff > 7:
                 ctx.task.detail.big_diff_race_count += 1
-        current_race_name = ocr_line(img[503: 546, 26: 339])
+        current_race_name = ocr_line(img[503: 546, 101: 339])
         log.debug(f"比赛 ({current_race_name}) 胜利，与第二名差距：{text}")
     
     ctx.task.detail.race_count += 1
