@@ -272,7 +272,7 @@ def script_cultivate_continue(ctx: UmamusumeContext):
 
 def script_scenario_select(ctx: UmamusumeContext):
     target_scenario = ctx.cultivate_detail.scenario.scenario_type()
-    # time.sleep(3) #如果网络非常差，这里可能会来不及等
+    time.sleep(3) #如果网络非常差，这里可能会来不及等
 
     for i in range(1, len(ScenarioType)):
         img = ctx.ctrl.get_screen(to_gray=True)
