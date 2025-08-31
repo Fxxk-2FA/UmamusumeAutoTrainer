@@ -112,3 +112,21 @@ USE_TP_DRINK_RESULT_CLOSE = ClickPoint(ClickPointType.CLICK_POINT_TYPE_COORDINAT
 # friendship
 TO_FIRST_FOLLOW_SUPPORT_CARD_SELECT = ClickPoint(ClickPointType.CLICK_POINT_TYPE_COORDINATE, None, Coordinate(385, 360), "借用第一个支援卡")
 TO_MENU_SELECT = ClickPoint(ClickPointType.CLICK_POINT_TYPE_COORDINATE, None, Coordinate(645, 1239), "打开菜单")
+
+# daily common
+TO_TOURNAMENT_SELECT = ClickPoint(ClickPointType.CLICK_POINT_TYPE_COORDINATE, None, Coordinate(524, 1239), "前往赛事")
+TO_TOURNAMENT_JJC = ClickPoint(ClickPointType.CLICK_POINT_TYPE_COORDINATE, None, Coordinate(221, 876), "前往竞技场")
+TO_TOURNAMENT_JJC_ENEMY_SELECT = ClickPoint(ClickPointType.CLICK_POINT_TYPE_COORDINATE, None, Coordinate(383, 810), "前往选择竞技对手")
+TO_TOURNAMENT_JJC_ENEMY_1ST_SELECT = ClickPoint(ClickPointType.CLICK_POINT_TYPE_COORDINATE, None, Coordinate(383, 360), "选择第一个竞技对手")
+TO_TOURNAMENT_JJC_ENEMY_CONTINUE = ClickPoint(ClickPointType.CLICK_POINT_TYPE_COORDINATE, None, Coordinate(368, 1084), "继续")
+TO_TOURNAMENT_JJC_ENEMY_SKIP = ClickPoint(ClickPointType.CLICK_POINT_TYPE_COORDINATE, None, Coordinate(372, 1196), "查看赛事结果")
+CANCEL_TOURNAMENT_JJC_RECOVER_RP = ClickPoint(ClickPointType.CLICK_POINT_TYPE_COORDINATE, None, Coordinate(200, 833), "取消恢复RP")
+CANCEL_TOURNAMENT_JJC_RETRY = ClickPoint(ClickPointType.CLICK_POINT_TYPE_COORDINATE, None, Coordinate(205, 1202), "再次参赛")
+CANCEL_TOURNAMENT_JJC_NEXT = ClickPoint(ClickPointType.CLICK_POINT_TYPE_COORDINATE, None, Coordinate(530, 1202), "下一步")
+CANCEL_TOURNAMENT_JJC_BOUNUS_CONTINUE = ClickPoint(ClickPointType.CLICK_POINT_TYPE_COORDINATE, None, Coordinate(364, 1181), "继续")
+CANCEL_TOURNAMENT_JJC_RETURN = ClickPoint(ClickPointType.CLICK_POINT_TYPE_COORDINATE, None, Coordinate(83, 1081), "返回")
+
+TO_TOURNAMENT_DAILY = ClickPoint(ClickPointType.CLICK_POINT_TYPE_COORDINATE, None, Coordinate(221, 1052), "前往日常赛事")
+TO_RACE_ATTEND = ClickPoint(ClickPointType.CLICK_POINT_TYPE_COORDINATE, None, Coordinate(512, 1186), "参赛")
+TO_UMAMUSUME_SELECT_DAILY = ClickPoint(ClickPointType.CLICK_POINT_TYPE_COORDINATE, None, Coordinate(367, 1086), "确定")
+TO_DAILY_RACE_MOONLIGHT_SELECT = ClickPoint(ClickPointType.CLICK_POINT_TYPE_COORDINATE, None, Coordinate(400, 700), "选择月光奖")

@@ -52,10 +52,21 @@ class CultivateContextDetail:
         self.learn_skill_done = False
         self.learn_skill_selected = False
 
+class DailyCommonTaskType(Enum):
+    DAILY_COMMON_TASK_TYPE_UNKNOWN = 0
+    DAILY_COMMON_TASK_TYPE_JJC = 1
+    DAILY_COMMON_TASK_TYPE_DAILY = 2
+
+class DailyCommonContextDetail:
+    current_task_type: DailyCommonTaskType
+
+    def __init__(self):
+        self.current_task_type = DailyCommonTaskType.DAILY_COMMON_TASK_TYPE_JJC
 
 class UmamusumeContext(BotContext):
     task: UmamusumeTask
     cultivate_detail: CultivateContextDetail
+    daily_common_detail: DailyCommonContextDetail
 
     def __init__(self, task, ctrl):
         super().__init__(task, ctrl)
@@ -66,30 +77,32 @@ class UmamusumeContext(BotContext):
 
 def build_context(task: UmamusumeTask, ctrl) -> UmamusumeContext:
     ctx = UmamusumeContext(task, ctrl)
-    if task.task_type == UmamusumeTaskType.UMAMUSUME_TASK_TYPE_CULTIVATE or task.task_type == UmamusumeTaskType.UMAMUSUME_TASK_TYPE_FRIENDSHIP:
-        detail = CultivateContextDetail()
-        # 根据剧本类型初始化对应的继承类
-        match task.detail.scenario:
-            case ScenarioType.SCENARIO_TYPE_URA:
-                detail.scenario = ura_scenario.URAScenario()
-            case ScenarioType.SCENARIO_TYPE_AOHARUHAI:
-                detail.scenario = aoharuhai_scenario.AoharuHaiScenario()
-            case _: # 占位, 实际上不可能到达这里
-                log.error("未知的场景")
-                detail.scenario = None
-        detail.expect_attribute = task.detail.expect_attribute
-        detail.follow_support_card_name = task.detail.follow_support_card_name
-        detail.follow_support_card_level = task.detail.follow_support_card_level
-        detail.extra_race_list = task.detail.extra_race_list
-        detail.learn_skill_list = task.detail.learn_skill_list
-        detail.learn_skill_blacklist = task.detail.learn_skill_blacklist
-        detail.tactic_list = task.detail.tactic_list
-        detail.clock_use_limit = task.detail.clock_use_limit
-        detail.learn_skill_threshold = task.detail.learn_skill_threshold
-        detail.learn_skill_only_user_provided = task.detail.learn_skill_only_user_provided
-        detail.allow_recover_tp = task.detail.allow_recover_tp
-        detail.extra_weight = task.detail.extra_weight
-        ctx.cultivate_detail = detail
+    # if task.task_type == UmamusumeTaskType.UMAMUSUME_TASK_TYPE_CULTIVATE or task.task_type == UmamusumeTaskType.UMAMUSUME_TASK_TYPE_FRIENDSHIP:
+    detail = CultivateContextDetail()
+    # 根据剧本类型初始化对应的继承类
+    match task.detail.scenario:
+        case ScenarioType.SCENARIO_TYPE_URA:
+            detail.scenario = ura_scenario.URAScenario()
+        case ScenarioType.SCENARIO_TYPE_AOHARUHAI:
+            detail.scenario = aoharuhai_scenario.AoharuHaiScenario()
+        case _: # 占位, 实际上不可能到达这里
+            log.error("未知的场景")
+            detail.scenario = None
+    detail.expect_attribute = task.detail.expect_attribute
+    detail.follow_support_card_name = task.detail.follow_support_card_name
+    detail.follow_support_card_level = task.detail.follow_support_card_level
+    detail.extra_race_list = task.detail.extra_race_list
+    detail.learn_skill_list = task.detail.learn_skill_list
+    detail.learn_skill_blacklist = task.detail.learn_skill_blacklist
+    detail.tactic_list = task.detail.tactic_list
+    detail.clock_use_limit = task.detail.clock_use_limit
+    detail.learn_skill_threshold = task.detail.learn_skill_threshold
+    detail.learn_skill_only_user_provided = task.detail.learn_skill_only_user_provided
+    detail.allow_recover_tp = task.detail.allow_recover_tp
+    detail.extra_weight = task.detail.extra_weight
+    ctx.cultivate_detail = detail
+    # elif task.task_type == UmamusumeTaskType.UMAMUSUME_TASK_TYPE_DAILY_COMMON:
+    ctx.daily_common_detail = DailyCommonContextDetail()
     return ctx
 
 

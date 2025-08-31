@@ -79,6 +79,23 @@ script_dicts: Dict[UmamusumeTaskType, dict] = {
         CULTIVATE_MAIN_MENU: script_cultivate_main_menu_friendship,
         NOT_FOUND_UI: script_not_found_ui,
         CULTIVATE_FINAL_CHECK: script_cultivate_final_check,
+    },
+    UmamusumeTaskType.UMAMUSUME_TASK_TYPE_DAILY_COMMON: {
+        INFO: script_info,
+        MAIN_MENU: script_main_menu_daily_common,
+        TOURNAMENT_MENU: script_tournament_menu,
+        TOURNAMENT_JJC_MENU: script_tournament_jjc_menu,
+        TOURNAMENT_JJC_ENEMY_SELECT: script_tournament_jjc_enemy_select,
+        TOURNAMENT_JJC_ENEMY_DETAIL: script_tournament_jjc_enemy_detail,
+        TOURNAMENT_JJC_ENEMY_SKIP: script_tournament_jjc_enemy_skip,
+        AOHARUHAI_RACE_END: script_tournament_jjc_enemy_finish,
+        TOURNAMENT_JJC_RESULT_1: script_tournament_jjc_result_1,
+        TOURNAMENT_JJC_RESULT_2: script_tournament_jjc_result_2,
+        TOURNAMENT_JJC_BONUS: script_tournament_jjc_bonus,
+        DAILY_RACE_SELECT: script_daily_race_select,
+        DAILY_RACE_MOONLIGHT_SELECT: script_daily_race_moonlight_select,
+        UMAMUSUME_SELECT: script_umamusume_select_daily,
+        NOT_FOUND_UI: script_not_found_ui,
     }
 }
 

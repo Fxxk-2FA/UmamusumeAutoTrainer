@@ -1,0 +1,8 @@
+version: 0.0.1
+port: 8073
+bot:
+  auto:
+    adb:
+      device_name: "192.168.0.103:5555"
+      delay: 0.5
+    cpu_alloc: 2

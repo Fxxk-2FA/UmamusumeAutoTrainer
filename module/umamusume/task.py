@@ -53,6 +53,7 @@ class UmamusumeTaskType(Enum):
     UMAMUSUME_TASK_TYPE_UNKNOWN = 0
     UMAMUSUME_TASK_TYPE_CULTIVATE = 1
     UMAMUSUME_TASK_TYPE_FRIENDSHIP = 2
+    UMAMUSUME_TASK_TYPE_DAILY_COMMON = 3
 
 
 def build_task(task_execute_mode: TaskExecuteMode, task_type: int,

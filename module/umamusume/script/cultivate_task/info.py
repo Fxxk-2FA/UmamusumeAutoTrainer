@@ -10,7 +10,7 @@ from bot.recog.image_matcher import image_match
 from bot.recog.ocr import ocr_line, find_similar_text
 from module.umamusume.asset.point import *
 from module.umamusume.asset.ui import INFO
-from module.umamusume.context import UmamusumeContext
+from module.umamusume.context import UmamusumeContext, DailyCommonTaskType
 import bot.base.log as logger
 
 log = logger.get_logger(__name__)
@@ -55,7 +55,11 @@ TITLE = [
     "日期变化",
     "公告",
     "菜单",
-    "放弃"
+    "放弃",
+    "选择道具",
+    "多次参赛",
+    "参赛结果",
+    "购买日常赛事入场券"
 ]
 
 
@@ -73,8 +77,11 @@ def script_info(ctx: UmamusumeContext):
             log.warning("未知的选项框")
             return
         if title_text == TITLE[0]:
-            ctx.ctrl.click_by_point(CULTIVATE_GOAL_RACE_INTER_3)
-            time.sleep(1)
+            if ctx.task.task_type == UmamusumeTaskType.UMAMUSUME_TASK_TYPE_DAILY_COMMON:
+                ctx.ctrl.click_by_point(TO_RACE_ATTEND)
+            else:
+                ctx.ctrl.click_by_point(CULTIVATE_GOAL_RACE_INTER_3)
+                time.sleep(1)
         if title_text == TITLE[1]:
             ctx.ctrl.click_by_point(INFO_SUMMER_REST_CONFIRM)
         if title_text == TITLE[2]:
@@ -144,7 +151,10 @@ def script_info(ctx: UmamusumeContext):
         if title_text == TITLE[25]:
             ctx.ctrl.click_by_point(ACTIVITY_STORY_UNLOCK_CONFIRM)
         if title_text == TITLE[26]:
-            if ctx.cultivate_detail.allow_recover_tp == 0: # 不允许用体力药或者钻石
+            if ctx.task.task_type == UmamusumeTaskType.UMAMUSUME_TASK_TYPE_DAILY_COMMON:
+                ctx.daily_common_detail.current_task_type = DailyCommonTaskType.DAILY_COMMON_TASK_TYPE_DAILY
+                ctx.ctrl.click_by_point(CANCEL_TOURNAMENT_JJC_RECOVER_RP)
+            elif ctx.cultivate_detail.allow_recover_tp == 0: # 不允许用体力药或者钻石
                 ctx.task.end_task(TaskStatus.TASK_STATUS_FAILED, UEndTaskReason.TP_NOT_ENOUGH)
             else:
                 ctx.ctrl.click_by_point(TO_RECOVER_TP)
@@ -220,6 +230,15 @@ def script_info(ctx: UmamusumeContext):
         if title_text == TITLE[36] and ctx.task.task_type == UmamusumeTaskType.UMAMUSUME_TASK_TYPE_FRIENDSHIP:
             # ctx.cultivate_detail.cultivate_finish = True
             ctx.ctrl.click(520, 840, "确认放弃")
-
+        if title_text == TITLE[37]:
+            ctx.ctrl.click(516, 910, "参赛")
+        if title_text == TITLE[38]:
+            ctx.ctrl.click(516, 841, "参赛")
+        if title_text == TITLE[39]:
+            ctx.daily_common_detail.current_task_type = DailyCommonTaskType.DAILY_COMMON_TASK_TYPE_UNKNOWN
+            ctx.ctrl.click(360, 1181, "关闭")
+        if title_text == TITLE[40]:
+            ctx.daily_common_detail.current_task_type = DailyCommonTaskType.DAILY_COMMON_TASK_TYPE_UNKNOWN
+            ctx.ctrl.click(206, 836, "关闭")
         # time.sleep(1)
 

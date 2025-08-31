@@ -486,6 +486,10 @@ export default {
         {
           id: 2,
           name: "友情点",
+        },
+        {
+          id: 3,
+          name: "日常"
         }
       ],
       umamusumeList:[

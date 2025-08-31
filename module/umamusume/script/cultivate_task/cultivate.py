@@ -7,6 +7,7 @@ import requests
 
 from bot.base.task import TaskStatus, EndTaskReason
 from module.umamusume.task import UmamusumeTaskType
+from module.umamusume.context import DailyCommonTaskType
 from module.umamusume.asset.point import *
 from module.umamusume.types import TurnInfo
 from module.umamusume.script.cultivate_task.const import SKILL_LEARN_PRIORITY_LIST
@@ -176,6 +177,66 @@ def script_cultivate_training_select(ctx: UmamusumeContext):
     if not ctx.cultivate_detail.turn_info.parse_main_menu_finish:
         ctx.ctrl.click_by_point(RETURN_TO_CULTIVATE_MAIN_MENU)
         return
+
+def script_tournament_menu(ctx: UmamusumeContext):
+    if ctx.daily_common_detail.current_task_type == DailyCommonTaskType.DAILY_COMMON_TASK_TYPE_UNKNOWN:
+        # end
+        ctx.task.end_task(TaskStatus.TASK_STATUS_SUCCESS, EndTaskReason.COMPLETE)
+    elif ctx.daily_common_detail.current_task_type == DailyCommonTaskType.DAILY_COMMON_TASK_TYPE_JJC:
+        ctx.ctrl.click_by_point(TO_TOURNAMENT_JJC)
+    elif ctx.daily_common_detail.current_task_type == DailyCommonTaskType.DAILY_COMMON_TASK_TYPE_DAILY:
+        ctx.ctrl.click_by_point(TO_TOURNAMENT_DAILY)
+        
+def script_tournament_jjc_menu(ctx: UmamusumeContext):
+    if ctx.daily_common_detail.current_task_type == DailyCommonTaskType.DAILY_COMMON_TASK_TYPE_JJC:
+        ctx.ctrl.click_by_point(TO_TOURNAMENT_JJC_ENEMY_SELECT)
+    else:
+        ctx.ctrl.click_by_point(CANCEL_TOURNAMENT_JJC_RETURN)
+        
+def script_tournament_jjc_enemy_select(ctx: UmamusumeContext):
+    ctx.ctrl.click_by_point(TO_TOURNAMENT_JJC_ENEMY_1ST_SELECT)
+        
+def script_tournament_jjc_enemy_detail(ctx: UmamusumeContext):
+    ctx.ctrl.click_by_point(TO_TOURNAMENT_JJC_ENEMY_CONTINUE)
+        
+def script_tournament_jjc_enemy_skip(ctx: UmamusumeContext):
+    ctx.ctrl.click_by_point(TO_TOURNAMENT_JJC_ENEMY_SKIP)
+        
+def script_tournament_jjc_enemy_finish(ctx: UmamusumeContext):
+    ctx.ctrl.click_by_point(TO_TOURNAMENT_JJC_ENEMY_CONTINUE)
+        
+def script_tournament_jjc_result_1(ctx: UmamusumeContext):
+    if ctx.daily_common_detail.current_task_type == DailyCommonTaskType.DAILY_COMMON_TASK_TYPE_JJC:
+        ctx.ctrl.click_by_point(CANCEL_TOURNAMENT_JJC_RETRY)
+    else:
+        ctx.ctrl.click_by_point(CANCEL_TOURNAMENT_JJC_NEXT)
+        
+def script_tournament_jjc_result_2(ctx: UmamusumeContext):
+    if ctx.daily_common_detail.current_task_type == DailyCommonTaskType.DAILY_COMMON_TASK_TYPE_JJC:
+        ctx.ctrl.click_by_point(CANCEL_TOURNAMENT_JJC_RETRY)
+    else:
+        ctx.ctrl.click_by_point(CANCEL_TOURNAMENT_JJC_NEXT)
+        
+def script_tournament_jjc_bonus(ctx: UmamusumeContext):
+    ctx.ctrl.click_by_point(CANCEL_TOURNAMENT_JJC_BOUNUS_CONTINUE)
+        
+def script_daily_race_select(ctx: UmamusumeContext):
+    if ctx.daily_common_detail.current_task_type == DailyCommonTaskType.DAILY_COMMON_TASK_TYPE_DAILY:
+        ctx.ctrl.click_by_point(TO_DAILY_RACE_MOONLIGHT_SELECT)
+    else:
+        ctx.ctrl.click_by_point(CANCEL_TOURNAMENT_JJC_RETURN)
+        
+def script_daily_race_moonlight_select(ctx: UmamusumeContext):
+    if ctx.daily_common_detail.current_task_type == DailyCommonTaskType.DAILY_COMMON_TASK_TYPE_DAILY:
+        ctx.ctrl.click_by_point(TO_DAILY_RACE_MOONLIGHT_SELECT)
+    else:
+        ctx.ctrl.click_by_point(CANCEL_TOURNAMENT_JJC_RETURN)
+        
+def script_umamusume_select_daily(ctx: UmamusumeContext):
+    ctx.ctrl.click_by_point(TO_UMAMUSUME_SELECT_DAILY)
+        
+def script_main_menu_daily_common(ctx: UmamusumeContext):
+    ctx.ctrl.click_by_point(TO_TOURNAMENT_SELECT)
 
 def send_message(msg):
     # 最长100
@@ -446,7 +507,12 @@ def script_cultivate_race_result(ctx: UmamusumeContext):
             if "/" in text:
                 diff = int(text[0])
             else:
-                diff = int(re.sub("\\D", "", text))
+                diff_text = re.sub("\\D", "", text)
+                if diff_text != "":
+                    diff = int(diff_text)
+                else:
+                    diff = 0
+                
             if diff > 7:
                 ctx.task.detail.big_diff_race_count += 1
         current_race_name = ocr_line(img[503: 546, 101: 339])

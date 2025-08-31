@@ -107,7 +107,8 @@ https://github.com/shiokaze/UmamusumeAutoTrainer/issues/25
 - [ ] 定时执行任务
 - [ ] 育成中ai逻辑优化
 - [ ] 事件支持配置选项
-- [ ] 自动完成每日金币/支援点/jjc/特卖商店
+- [x] 自动完成每日金币/jjc
+- [ ] 自动完成特卖商店
 - [x] 提高育成中的训练数据识别率
 - [x] 支持多次循环跑，创建多个task
 - [x] 外出只在不佳以下的時候
