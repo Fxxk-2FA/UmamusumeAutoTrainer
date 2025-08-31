@@ -128,6 +128,8 @@ https://github.com/shiokaze/UmamusumeAutoTrainer/issues/25
 - [x] 计算比赛胜利时的马身差距，打印
 - [ ] 巅峰杯逻辑
 - [ ] 处理关注的异常case
+- [x] 增加友情点刷取脚本
+- [ ] 支持多个设备同时运行
 
 ### 参与开发
 

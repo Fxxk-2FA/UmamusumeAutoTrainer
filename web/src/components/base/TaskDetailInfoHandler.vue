@@ -12,10 +12,10 @@
         <button type="button" class="btn auto-btn" v-on:click="deleteTask">删除</button>
       </div>
       <UmamusumeTaskDetailInfo :task="task"></UmamusumeTaskDetailInfo>
-      <div>
+      <div v-if="task.detail.cultivate_progress_info.progress !== undefined && task.detail.cultivate_progress_info.progress > 0">
         <span>进度: {{task.detail.cultivate_progress_info.progress.toFixed(0)}}%</span>
       </div>
-      <div>
+      <div v-if="task.detail.race_count !== undefined && task.detail.race_count > 0">
         <span>大差/比赛数: {{task.detail.big_diff_race_count}}/{{task.detail.race_count}}</span>
       </div>
       <div v-if="task.end_task_reason !== undefined && task.end_task_reason != ''">

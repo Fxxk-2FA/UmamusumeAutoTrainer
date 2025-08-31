@@ -66,7 +66,7 @@ class UmamusumeContext(BotContext):
 
 def build_context(task: UmamusumeTask, ctrl) -> UmamusumeContext:
     ctx = UmamusumeContext(task, ctrl)
-    if task.task_type == UmamusumeTaskType.UMAMUSUME_TASK_TYPE_CULTIVATE:
+    if task.task_type == UmamusumeTaskType.UMAMUSUME_TASK_TYPE_CULTIVATE or task.task_type == UmamusumeTaskType.UMAMUSUME_TASK_TYPE_FRIENDSHIP:
         detail = CultivateContextDetail()
         # 根据剧本类型初始化对应的继承类
         match task.detail.scenario:

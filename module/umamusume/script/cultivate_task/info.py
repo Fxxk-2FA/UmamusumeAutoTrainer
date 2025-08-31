@@ -5,7 +5,7 @@ import pytz
 import cv2
 
 from bot.base.task import TaskStatus, EndTaskReason
-from module.umamusume.task import EndTaskReason as UEndTaskReason
+from module.umamusume.task import UmamusumeTaskType, EndTaskReason as UEndTaskReason
 from bot.recog.image_matcher import image_match
 from bot.recog.ocr import ocr_line, find_similar_text
 from module.umamusume.asset.point import *
@@ -53,7 +53,9 @@ TITLE = [
     "对战确认",
     # 5点日期变化
     "日期变化",
-    "公告"
+    "公告",
+    "菜单",
+    "放弃"
 ]
 
 
@@ -213,5 +215,11 @@ def script_info(ctx: UmamusumeContext):
             ctx.ctrl.click(370, 840, "确认")
         if title_text == TITLE[34]:
             ctx.ctrl.click(360, 1200, "关闭")
-        time.sleep(1)
+        if title_text == TITLE[35] and ctx.task.task_type == UmamusumeTaskType.UMAMUSUME_TASK_TYPE_FRIENDSHIP:
+            ctx.ctrl.click(563, 537, "放弃")
+        if title_text == TITLE[36] and ctx.task.task_type == UmamusumeTaskType.UMAMUSUME_TASK_TYPE_FRIENDSHIP:
+            # ctx.cultivate_detail.cultivate_finish = True
+            ctx.ctrl.click(520, 840, "确认放弃")
+
+        # time.sleep(1)
 

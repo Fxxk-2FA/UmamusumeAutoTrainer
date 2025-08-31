@@ -6,6 +6,7 @@ import numpy as np
 import requests
 
 from bot.base.task import TaskStatus, EndTaskReason
+from module.umamusume.task import UmamusumeTaskType
 from module.umamusume.asset.point import *
 from module.umamusume.types import TurnInfo
 from module.umamusume.script.cultivate_task.const import SKILL_LEARN_PRIORITY_LIST
@@ -182,19 +183,20 @@ def send_message(msg):
 
 def script_main_menu(ctx: UmamusumeContext):
     if ctx.cultivate_detail.cultivate_finish:
-        img = ctx.ctrl.get_screen()
-        ctx.task.detail.after_diamond_count = parse_diamond(img, ctx)
-        diamond_msg = f"钻石变化：{ctx.task.detail.before_diamond_count} -> {ctx.task.detail.after_diamond_count}"
-        if ctx.task.detail.after_diamond_count != 0 and ctx.task.detail.before_diamond_count != 0:
-            diamond_msg += f", +{int(ctx.task.detail.after_diamond_count) - int(ctx.task.detail.before_diamond_count)}"
-        log.info(diamond_msg)
-        send_message(diamond_msg)
-        
-        factor_msg = "因子："
-        if 'factor_list' in ctx.task.detail.cultivate_result:
-            for factor in ctx.task.detail.cultivate_result['factor_list']:
-                factor_msg += f"{factor[0]}({factor[1]}) "
-        send_message(factor_msg)
+        if ctx.task.task_type == UmamusumeTaskType.UMAMUSUME_TASK_TYPE_CULTIVATE:
+            img = ctx.ctrl.get_screen()
+            ctx.task.detail.after_diamond_count = parse_diamond(img, ctx)
+            diamond_msg = f"钻石变化：{ctx.task.detail.before_diamond_count} -> {ctx.task.detail.after_diamond_count}"
+            if ctx.task.detail.after_diamond_count != 0 and ctx.task.detail.before_diamond_count != 0:
+                diamond_msg += f", +{int(ctx.task.detail.after_diamond_count) - int(ctx.task.detail.before_diamond_count)}"
+            log.info(diamond_msg)
+            send_message(diamond_msg)
+            
+            factor_msg = "因子："
+            if 'factor_list' in ctx.task.detail.cultivate_result:
+                for factor in ctx.task.detail.cultivate_result['factor_list']:
+                    factor_msg += f"{factor[0]}({factor[1]}) "
+            send_message(factor_msg)
 
         ctx.task.detail.cultivate_progress_info["progress"] = 100
         ctx.task.end_task(TaskStatus.TASK_STATUS_SUCCESS, EndTaskReason.COMPLETE)
@@ -242,6 +244,11 @@ def script_support_card_select(ctx: UmamusumeContext):
         return
     ctx.ctrl.click_by_point(TO_CULTIVATE_PREPARE_NEXT)
 
+def script_cultivate_main_menu_friendship(ctx: UmamusumeContext):
+    ctx.ctrl.click_by_point(TO_MENU_SELECT)
+
+def script_follow_support_card_select_friendship(ctx: UmamusumeContext):
+    ctx.ctrl.click_by_point(TO_FIRST_FOLLOW_SUPPORT_CARD_SELECT)
 
 def script_follow_support_card_select(ctx: UmamusumeContext):
     img = ctx.ctrl.get_screen()

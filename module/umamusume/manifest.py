@@ -66,6 +66,19 @@ script_dicts: Dict[UmamusumeTaskType, dict] = {
         ACTIVITY_REWARD: script_cultivate_result,
         FUJIKISEKI_SHOW_MODE_RESULT_1: script_fujikiseki_show_result_1,
         FUJIKISEKI_SHOW_MODE_RESULT_2: script_fujikiseki_show_result_2
+    },
+    UmamusumeTaskType.UMAMUSUME_TASK_TYPE_FRIENDSHIP: {
+        INFO: script_info,
+        MAIN_MENU: script_main_menu,
+        CULTIVATE_CONTINUE: script_cultivate_continue,
+        CULTIVATE_SCENARIO_SELECT: script_scenario_select,
+        CULTIVATE_UMAMUSUME_SELECT: script_umamusume_select,
+        CULTIVATE_EXTEND_UMAMUSUME_SELECT: script_extend_umamusume_select,
+        CULTIVATE_SUPPORT_CARD_SELECT: script_support_card_select,
+        CULTIVATE_FOLLOW_SUPPORT_CARD_SELECT: script_follow_support_card_select_friendship,
+        CULTIVATE_MAIN_MENU: script_cultivate_main_menu_friendship,
+        NOT_FOUND_UI: script_not_found_ui,
+        CULTIVATE_FINAL_CHECK: script_cultivate_final_check,
     }
 }
 

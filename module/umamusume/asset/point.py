@@ -109,3 +109,6 @@ USE_TP_DRINK_CONFIRM = ClickPoint(ClickPointType.CLICK_POINT_TYPE_COORDINATE, No
 USE_DIAMOND_RECOVER_CONFIRM = ClickPoint(ClickPointType.CLICK_POINT_TYPE_COORDINATE, None, Coordinate(525, 920), "使用钻石回复tp-确认", None)
 USE_TP_DRINK_RESULT_CLOSE = ClickPoint(ClickPointType.CLICK_POINT_TYPE_COORDINATE, None, Coordinate(360, 835), "回复完成-关闭", None)
 
+# friendship
+TO_FIRST_FOLLOW_SUPPORT_CARD_SELECT = ClickPoint(ClickPointType.CLICK_POINT_TYPE_COORDINATE, None, Coordinate(385, 360), "借用第一个支援卡")
+TO_MENU_SELECT = ClickPoint(ClickPointType.CLICK_POINT_TYPE_COORDINATE, None, Coordinate(645, 1239), "打开菜单")
