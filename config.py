@@ -12,10 +12,7 @@ class Config(dict):
         return value
 
 
-def load() -> Config:
-    config_file = open("config.yaml", 'r', encoding='utf-8')
+def loadConfig(file_name) -> Config:
+    config_file = open(file_name, 'r', encoding='utf-8')
     config = config_file.read()
     return Config(yaml.load(config, yaml.FullLoader))
-
-
-CONFIG = load()

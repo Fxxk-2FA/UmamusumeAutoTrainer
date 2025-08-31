@@ -1,5 +1,6 @@
 from bot.base.resource import UI
 from typing import Dict
+from config import Config
 
 
 class AppManifest:
@@ -13,10 +14,11 @@ class AppManifest:
     script: callable = None
     before_hook: callable = None
     after_hook: callable = None
+    extra_config: Config = None
 
     def __init__(self, app_name: str, app_activity_name: str, app_package_name: str,
                  build_context: callable, build_task: callable, ui_list: list[UI],
-                 script: callable, before_hook: callable, after_hook: callable):
+                 script: callable, before_hook: callable, after_hook: callable, extra_config=Config()):
         self.app_name = app_name
         self.app_activity_name = app_activity_name
         self.app_package_name = app_package_name
@@ -26,6 +28,7 @@ class AppManifest:
         self.before_hook = before_hook
         self.after_hook = after_hook
         self.script = script
+        self.extra_config = extra_config
 
 
 APP_MANIFEST_LIST: Dict[str, AppManifest] = {}

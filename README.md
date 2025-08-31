@@ -67,11 +67,6 @@ mumu模拟器不能开启后台保活功能
 
 双击运行run.ps1即可
 
-控制台显示以下内容即为启动成功
-```commandline
-UAT running on http://127.0.0.1:8071
-```
-
 复制到浏览器访问即可通过webui配置任务并启动脚本
 
 <img alt="LOGO" src="docs/1.png" width="680" height="565" />
@@ -129,7 +124,7 @@ https://github.com/shiokaze/UmamusumeAutoTrainer/issues/25
 - [ ] 巅峰杯逻辑
 - [ ] 处理关注的异常case
 - [x] 增加友情点刷取脚本
-- [ ] 支持多个设备同时运行
+- [x] 支持配置config文件，实现多个设备同时运行在不同网页端口控制
 
 ### 参与开发
 

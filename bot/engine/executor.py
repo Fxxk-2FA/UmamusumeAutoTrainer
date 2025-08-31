@@ -14,16 +14,15 @@ from bot.conn.u2_ctrl import U2AndroidController
 from bot.recog.image_matcher import template_match
 from concurrent.futures import ThreadPoolExecutor
 from bot.base.manifest import APP_MANIFEST_LIST
-from config import CONFIG
-
+from config import Config
 
 log = logger.get_logger(__name__)
 
 debug = True
 
 
-def get_controller() -> U2AndroidController:
-    return U2AndroidController()
+def get_controller(config: Config) -> U2AndroidController:
+    return U2AndroidController(config)
 
 
 class Executor:
@@ -34,11 +33,10 @@ class Executor:
 
     detect_ui_results_write_lock = threading.Lock()
     detect_ui_results = []
-    executor = ThreadPoolExecutor(max_workers=CONFIG.bot.auto.cpu_alloc)
 
-    def __init__(self):
-        psutil.Process().cpu_affinity(list(range(CONFIG.bot.auto.cpu_alloc)))
-        pass
+    def __init__(self, max_workers=4):
+        psutil.Process().cpu_affinity(list(range(max_workers)))
+        self.executor = ThreadPoolExecutor(max_workers=max_workers)
 
     def start(self, task):
         self.active = True
@@ -97,7 +95,7 @@ class Executor:
         ui_list = manifest.ui_list
         before_hook = manifest.before_hook
         after_hook = manifest.after_hook
-        controller = get_controller()
+        controller = get_controller(manifest.extra_config)
         try:
             # 初始化
             controller.init_env()

@@ -13,7 +13,7 @@ from bot.base.common import ImageMatchMode
 from bot.base.point import ClickPoint, ClickPointType
 from bot.conn.ctrl import AndroidController
 from bot.recog.image_matcher import template_match
-from config import CONFIG, Config
+from config import Config
 from dataclasses import dataclass, field
 
 log = logger.get_logger(__name__)
@@ -59,16 +59,14 @@ class U2AndroidConfig:
 
 
 class U2AndroidController(AndroidController):
-    config = U2AndroidConfig.load(CONFIG)
-
     path = "deps\\adb\\"
     recent_point = None
     recent_operation_time = None
     same_point_operation_interval = 0.3
     u2client = None
 
-    def __init__(self):
-        pass
+    def __init__(self, config):
+        self.config = U2AndroidConfig.load(config)
 
     # init_env 初始化环境
     def init_env(self) -> None:
