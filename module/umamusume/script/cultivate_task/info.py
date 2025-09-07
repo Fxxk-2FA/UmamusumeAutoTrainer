@@ -59,7 +59,9 @@ TITLE = [
     "选择道具",
     "多次参赛",
     "参赛结果",
-    "购买日常赛事入场券"
+    "购买日常赛事入场券",
+    "关注训练员",
+    "连接已断开"
 ]
 
 
@@ -240,5 +242,9 @@ def script_info(ctx: UmamusumeContext):
         if title_text == TITLE[40]:
             ctx.daily_common_detail.current_task_type = DailyCommonTaskType.DAILY_COMMON_TASK_TYPE_UNKNOWN
             ctx.ctrl.click(206, 836, "关闭")
+        if title_text == TITLE[41]:
+            ctx.ctrl.click(215, 836, "取消")
+        if title_text == TITLE[42]:
+            ctx.ctrl.click(387, 853, "关闭")
         # time.sleep(1)
 

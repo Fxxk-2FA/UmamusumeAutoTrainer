@@ -5,4 +5,4 @@ bot:
     adb:
       device_name: "192.168.0.101:5555"
       delay: 0.5
-    cpu_alloc: 4
+    cpu_alloc: 2

@@ -265,6 +265,9 @@ def script_main_menu(ctx: UmamusumeContext):
     img = ctx.ctrl.get_screen()
     ctx.task.detail.before_diamond_count = parse_diamond(img, ctx)
     log.info(f"初始钻石：{ctx.task.detail.before_diamond_count}")
+    if ctx.task.task_type == UmamusumeTaskType.UMAMUSUME_TASK_TYPE_FRIENDSHIP:
+        ctx.cultivate_detail.cycle_count += 1
+        log.info(f"循环次数：{ctx.cultivate_detail.cycle_count}")
     ctx.ctrl.click_by_point(TO_CULTIVATE_SCENARIO_CHOOSE)
 
 def script_cultivate_continue(ctx: UmamusumeContext):
@@ -272,7 +275,7 @@ def script_cultivate_continue(ctx: UmamusumeContext):
 
 def script_scenario_select(ctx: UmamusumeContext):
     target_scenario = ctx.cultivate_detail.scenario.scenario_type()
-    time.sleep(3) #如果网络非常差，这里可能会来不及等
+    # time.sleep(3) #如果网络非常差，这里可能会来不及等
 
     for i in range(1, len(ScenarioType)):
         img = ctx.ctrl.get_screen(to_gray=True)
@@ -286,8 +289,8 @@ def script_scenario_select(ctx: UmamusumeContext):
         ctx.ctrl.swipe(x1=400, y1=600, x2=500, y2=600, duration=300, name="swipe right")
         time.sleep(1)
 
-    log.error(f"找不到指定的剧本")
-    ctx.task.end_task(TaskStatus.TASK_STATUS_FAILED, EndTaskReason.SCENARIO_NOT_FOUND)
+    log.warning(f"找不到指定的剧本")
+    # ctx.task.end_task(TaskStatus.TASK_STATUS_FAILED, EndTaskReason.SCENARIO_NOT_FOUND)
 
 
 def script_umamusume_select(ctx: UmamusumeContext):
