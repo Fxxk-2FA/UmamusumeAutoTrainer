@@ -114,7 +114,7 @@ class Executor:
                     ctx.current_screen = ctx.ctrl.get_screen()
                     if ctx.current_screen is None:
                         log.debug("未检测到图像")
-                        time.sleep(1)
+                        time.sleep(0.5)
                         continue
                     ctx.prev_ui = ctx.current_ui
                     ctx.current_ui = self.detect_ui(ui_list, ctx.current_screen)

@@ -61,7 +61,8 @@ TITLE = [
     "参赛结果",
     "购买日常赛事入场券",
     "关注训练员",
-    "连接已断开"
+    "连接已断开",
+    "自动选择确认"
 ]
 
 
@@ -246,5 +247,9 @@ def script_info(ctx: UmamusumeContext):
             ctx.ctrl.click(215, 836, "取消")
         if title_text == TITLE[42]:
             ctx.ctrl.click(387, 853, "关闭")
+        if title_text == TITLE[43]:
+            ctx.ctrl.click(305, 710, "包含借用")
+            time.sleep(0.5)
+            ctx.ctrl.click(514, 833, "确认选择")
         # time.sleep(1)
 

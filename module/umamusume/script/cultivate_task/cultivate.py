@@ -338,6 +338,8 @@ def script_follow_support_card_select(ctx: UmamusumeContext):
 def script_cultivate_final_check(ctx: UmamusumeContext):
     ctx.ctrl.click_by_point(CULTIVATE_FINAL_CHECK_START)
 
+def script_no_parent_umamusume(ctx: UmamusumeContext):
+    ctx.ctrl.click(533, 975, "自动选择")
 
 def script_cultivate_event(ctx: UmamusumeContext):
     img = ctx.ctrl.get_screen()

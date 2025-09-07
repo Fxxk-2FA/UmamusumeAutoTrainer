@@ -73,7 +73,7 @@ class Scheduler:
             else:
                 if task_executor.active:
                     task_executor.stop()
-            time.sleep(1)
+            time.sleep(0.5)
 
     def copy_task(self, task, to_task_execute_mode: TaskExecuteMode):
         new_task = copy.deepcopy(task)

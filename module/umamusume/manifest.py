@@ -73,12 +73,13 @@ script_dicts: Dict[UmamusumeTaskType, dict] = {
         CULTIVATE_CONTINUE: script_cultivate_continue,
         CULTIVATE_SCENARIO_SELECT: script_scenario_select,
         CULTIVATE_UMAMUSUME_SELECT: script_umamusume_select,
+        NO_PARENT_UMAMUSUME: script_no_parent_umamusume,
         CULTIVATE_EXTEND_UMAMUSUME_SELECT: script_extend_umamusume_select,
         CULTIVATE_SUPPORT_CARD_SELECT: script_support_card_select,
         CULTIVATE_FOLLOW_SUPPORT_CARD_SELECT: script_follow_support_card_select_friendship,
         CULTIVATE_MAIN_MENU: script_cultivate_main_menu_friendship,
         NOT_FOUND_UI: script_not_found_ui,
-        CULTIVATE_FINAL_CHECK: script_cultivate_final_check,
+        CULTIVATE_FINAL_CHECK: script_cultivate_final_check
     },
     UmamusumeTaskType.UMAMUSUME_TASK_TYPE_DAILY_COMMON: {
         INFO: script_info,
